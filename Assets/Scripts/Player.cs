@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     // Player State (Variable)
     private bool playerIsGrounded;
     private Vector3 playerVelocity;
-    private Vector3 movement_direction;
+    private Vector3 movementDirection;
 
     // Player Constants
     private float walkingVelocity = 15.0f;
@@ -52,7 +52,6 @@ public class Player : MonoBehaviour
         }
 
         if(Input.GetKey("a")) {
-            Debug.Log("A down");
             transform.Rotate(new Vector3(0, -90, 0) * Time.deltaTime);
         }
 
