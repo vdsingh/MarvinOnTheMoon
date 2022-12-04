@@ -11,10 +11,11 @@ public class Player : MonoBehaviour
     // Player State (Variable)
     private bool playerIsGrounded;
     private Vector3 playerVelocity;
+    private Vector3 movement_direction;
 
     // Player Constants
-    private float playerSpeed = 8.0f;
-    private float jumpHeight = 1.0f;
+    private float walkingVelocity = 15.0f;
+    private float jumpHeight = 10.0f;
     private float gravityValue = -1.62f; // This is the moon's gravity
 
     // Start is called before the first frame update
@@ -36,23 +37,26 @@ public class Player : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        characterController.Move(move * Time.deltaTime * playerSpeed);
+        if(Input.GetKey("w")) {
+            float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
+            float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
+            movementDirection = new Vector3(xdirection, 0.0f, zdirection);
 
-        if (move != Vector3.zero) {
-            gameObject.transform.forward = move;
+            characterController.Move(movementDirection * walkingVelocity * Time.deltaTime);
         }
 
+
         // Changes the height position of the player.
-        if (Input.GetKey(KeyCode.Space) && playerIsGrounded) {
+        if(Input.GetKey(KeyCode.Space) && playerIsGrounded) {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
 
-        if(Input.GetKeyDown("a")) {
+        if(Input.GetKey("a")) {
+            Debug.Log("A down");
             transform.Rotate(new Vector3(0, -90, 0) * Time.deltaTime);
         }
 
-        if(Input.GetKeyDown("d")) {
+        if(Input.GetKey("d")) {
             transform.Rotate(new Vector3(0, 90, 0) * Time.deltaTime);
         }
 
