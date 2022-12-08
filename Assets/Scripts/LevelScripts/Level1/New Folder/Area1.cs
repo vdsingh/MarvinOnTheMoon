@@ -5,12 +5,13 @@ using UnityEngine;
 public class Area1 : MonoBehaviour
 {
 
-    public VerticalGate exitGate;
+    public GameObject exitGate;
     // Start is called before the first frame update
 
     void Start()
     {
-        exitGate.openGate();
+        Debug.Log("Area 1 Start");
+        // exitGate.GetComponent<Gate>().OpenGate();
     }
 
     // Update is called once per frame
