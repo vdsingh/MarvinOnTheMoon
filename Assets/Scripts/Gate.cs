@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VerticalGate : MonoBehaviour
+public class Gate : MonoBehaviour
 {
 
     bool isOpen = false;
@@ -15,7 +15,7 @@ public class VerticalGate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // originalDoorWidth = leftDoor.transform.width;
+        originalDoorWidth = leftDoor.transform.localScale[2];
     }
 
     // Update is called once per frame
@@ -24,16 +24,17 @@ public class VerticalGate : MonoBehaviour
 
     }
 
-    public void openGate() {
+    public void OpenGate() {
+        Debug.Log("Gate opening.");
         Vector3 newScale = leftDoor.transform.localScale;
-        newScale[0] = 1;
+        newScale[2] = 1;
         leftDoor.transform.localScale = newScale;
         rightDoor.transform.localScale = newScale;
     }
 
-    public void closeGate() {
+    public void CloseGate() {
         Vector3 newScale = leftDoor.transform.localScale;
-        newScale[0] = originalDoorWidth;
+        newScale[2] = originalDoorWidth;
         leftDoor.transform.localScale = newScale;
         rightDoor.transform.localScale = newScale;
     }
