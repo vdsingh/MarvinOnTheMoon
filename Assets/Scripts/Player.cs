@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
 
     // Player Constants
     private float walkingVelocity = 15.0f;
-    private float jumpHeight = 10.0f;
-    private float gravityValue = -1.62f; // This is the moon's gravity
+    private float jumpHeight = 5.0f;
+    private float gravityValue = -5f; // This is the moon's gravity
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +43,14 @@ public class Player : MonoBehaviour
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
 
             characterController.Move(movementDirection * walkingVelocity * Time.deltaTime);
+        }
+
+        if(Input.GetKey("s")) {
+            float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
+            float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
+            movementDirection = new Vector3(xdirection, 0.0f, zdirection);
+
+            characterController.Move(-1 * movementDirection * walkingVelocity * Time.deltaTime);
         }
 
 
