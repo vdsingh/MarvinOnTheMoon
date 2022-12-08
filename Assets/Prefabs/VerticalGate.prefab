@@ -626,7 +626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1462749235418195039}
-  - component: {fileID: 6821922093590900616}
+  - component: {fileID: 8583613957493503967}
   m_Layer: 0
   m_Name: VerticalGate
   m_TagString: Untagged
@@ -652,7 +652,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6821922093590900616
+--- !u!114 &8583613957493503967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8375119385557577868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76fafb2d2858b405a9e48dad5633fb89, type: 3}
+  m_Script: {fileID: 11500000, guid: c4ad5f28f4ec44273a9984f705a312fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   leftDoor: {fileID: 7606084647246857727}
