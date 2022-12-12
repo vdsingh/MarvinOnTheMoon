@@ -108,8 +108,8 @@ GameObject:
   - component: {fileID: 8761043117601732480}
   m_Layer: 0
   m_Name: DoorWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_TagString: Prefab
+  m_Icon: {fileID: 2800000, guid: e440ca85e93dea348ac7171fe06ac443, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
