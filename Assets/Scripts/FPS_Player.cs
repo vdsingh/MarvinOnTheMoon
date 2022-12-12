@@ -50,6 +50,7 @@ public class FPS_Player : MonoBehaviour
         yRotation += mouseX;
 
         camera.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
+        transform.eulerAngles = new Vector3(0.0f, yRotation, 0.0f);
     }
 
     void HandleMovement() {
@@ -57,33 +58,25 @@ public class FPS_Player : MonoBehaviour
         if (playerIsGrounded && playerVelocity.y < 0) {
             playerVelocity.y = 0f;
         }
+            float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
+            float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
 
         if(Input.GetKey("w")) {
-            float xdirection = Mathf.Sin(Mathf.Deg2Rad * camera.transform.rotation.eulerAngles.y);
-            float zdirection = Mathf.Cos(Mathf.Deg2Rad * camera.transform.rotation.eulerAngles.y);
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
-
             characterController.Move(movementDirection * walkingVelocity * Time.deltaTime);
         }
         if (Input.GetKey("s")) {
-            float xdirection = Mathf.Sin(Mathf.Deg2Rad * camera.transform.rotation.eulerAngles.y);
-            float zdirection = Mathf.Cos(Mathf.Deg2Rad * camera.transform.rotation.eulerAngles.y);
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
-
             characterController.Move(-movementDirection * walkingVelocity * Time.deltaTime);
         }
         if (Input.GetKey("a")) {
-            float xdirection = Mathf.Sin(Mathf.Deg2Rad * camera.transform.rotation.eulerAngles.y);
-            float zdirection = Mathf.Cos(Mathf.Deg2Rad * camera.transform.rotation.eulerAngles.y);
-            movementDirection = new Vector3(zdirection, 0.0f, xdirection);
-
-            characterController.Move(-movementDirection * walkingVelocity * Time.deltaTime);
+            movementDirection = new Vector3(xdirection, 0.0f, zdirection);
+            movementDirection = Quaternion.Euler(0, -90, 0) * movementDirection;
+            characterController.Move(-movementDirection * walkingVelocity * Time.deltaTime * -1);
         }
         if (Input.GetKey("d")) {
-            float xdirection = Mathf.Sin(Mathf.Deg2Rad * camera.transform.rotation.eulerAngles.y);
-            float zdirection = Mathf.Cos(Mathf.Deg2Rad * camera.transform.rotation.eulerAngles.y);
-            movementDirection = new Vector3(zdirection, 0.0f, xdirection);
-
+            movementDirection = new Vector3(xdirection, 0.0f, zdirection);
+            movementDirection = Quaternion.Euler(0, 90, 0) * movementDirection;
             characterController.Move(movementDirection * walkingVelocity * Time.deltaTime);
         }
 
