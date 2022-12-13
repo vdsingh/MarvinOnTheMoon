@@ -59,12 +59,13 @@ public class FPS_Player : MonoBehaviour
 
     GameObject Find_Prefab_Object(GameObject obj)
     {
-        while (obj.transform.parent != null)
+        GameObject temp = obj;
+        while (temp.transform.parent != null)
         {
-            obj = obj.transform.parent.gameObject;
-            if (obj.tag == "Prefab")
+            temp = temp.transform.parent.gameObject;
+            if (temp.tag == "Prefab")
             {
-                return obj;
+                return temp;
             }
         }
         return obj;
@@ -99,9 +100,14 @@ public class FPS_Player : MonoBehaviour
             Texture2D icon = (Texture2D)AssetPreview.GetAssetPreview(obj);
             object_icon.texture = icon;
             object_name.text = obj.name;
-            if (obj.GetComponent<Gravity>() != null)
+
+            if (obj.GetComponent<ChangableGravity>() != null)
             {
-                object_gravity.text = "Gravity: " + obj.GetComponent<Gravity>().gravity;
+                object_gravity.text = "Gravity: " + obj.GetComponent<ChangableGravity>().gravity;
+                if (Input.GetKey(KeyCode.Tab))
+                {
+                    obj.GetComponent<ChangableGravity>().gravity *= -1;
+                }
             }
             else
             {
