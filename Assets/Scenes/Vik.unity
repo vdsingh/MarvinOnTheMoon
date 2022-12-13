@@ -234,6 +234,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PressurePlate
       objectReference: {fileID: 0}
+    - target: {fileID: 4718395177462932543, guid: 84223ecc78bbe4e069e323d4706d94ad, type: 3}
+      propertyPath: m_TagString
+      value: Block
+      objectReference: {fileID: 0}
     - target: {fileID: 6248541461859760886, guid: 84223ecc78bbe4e069e323d4706d94ad, type: 3}
       propertyPath: gate
       value: 
@@ -464,7 +468,7 @@ GameObject:
   - component: {fileID: 774700319}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -556,7 +560,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774700318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -70.47367, y: 6.6223288, z: 88.80942}
+  m_LocalPosition: {x: -70.49, y: 7.01, z: 88.80942}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

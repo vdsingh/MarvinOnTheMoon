@@ -29,10 +29,8 @@ public class PressurePlate : MonoBehaviour
     //Detect collisions between the GameObjects with Colliders attached
     void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Collision detected.");
         Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
         if(rb != null) {
-            Debug.Log("Collided with another RB");
             numObjectsOnPlate += 1;
             // weightOnPlate += ;
 

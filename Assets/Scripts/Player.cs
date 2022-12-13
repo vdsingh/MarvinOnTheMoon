@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     private float jumpHeight = 5.0f;
     private float gravityValue = -5f; // This is the moon's gravity
 
+    // The force that the user has when pushing things like blocks
+    private float pushForce = 5.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,5 +72,13 @@ public class Player : MonoBehaviour
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerVelocity * Time.deltaTime);
+    }
+
+    void OnCollisionEnter(Collision collision) {
+        if(collision.gameObject.tag == "Block") {
+            Debug.Log("Collision with Block");
+            float pushStrength = pushForce;
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(movementDirection * pushStrength, ForceMode.Impulse);
+        }
     }
 }
