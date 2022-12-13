@@ -22,6 +22,7 @@ public class FPS_Player : MonoBehaviour
     public TMP_Text object_gravity;
     public TMP_Text gravity_text;
     public GameObject panel;
+    private GameObject pause_menu;
 
     // Player State (Variable)
     private bool playerIsGrounded;
@@ -39,6 +40,8 @@ public class FPS_Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pause_menu = GameObject.Find("Pause Menu Controller");
+        
         firstPersonCamera.enabled = true;
         thirdPersonCamera.enabled = false;
 
@@ -51,6 +54,15 @@ public class FPS_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(pause_menu != null)
+        {
+            if(pause_menu.GetComponent<PauseMenu>().paused)
+            {
+                panel.active = false;
+                return;
+            }
+        }
+
         Update_Camera();
         HandleMovement();
         Looking_At_Object();

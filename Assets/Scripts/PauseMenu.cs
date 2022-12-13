@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] private GameObject controlsPanel;
 
-    [SerializeField] private bool paused;
+    [SerializeField] internal bool paused;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +47,8 @@ public class PauseMenu : MonoBehaviour
         paused = true;
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void UnpauseGame()
@@ -54,6 +56,8 @@ public class PauseMenu : MonoBehaviour
         paused = false;
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void ReturnToMain()
