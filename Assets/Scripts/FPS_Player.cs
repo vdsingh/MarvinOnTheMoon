@@ -15,7 +15,8 @@ public class FPS_Player : MonoBehaviour
 
     // Components
     private CharacterController characterController;
-    public Camera camera;
+    public Camera firstPersonCamera;
+    public Camera thirdPersonCamera;
     public RawImage object_icon;
     public TMP_Text object_name;
     public TMP_Text object_gravity;
@@ -38,6 +39,9 @@ public class FPS_Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        firstPersonCamera.enabled = true;
+        thirdPersonCamera.enabled = false;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         characterController = gameObject.GetComponent<CharacterController>();
@@ -87,7 +91,8 @@ public class FPS_Player : MonoBehaviour
     void Looking_At_Object()
     {
         RaycastHit hit;
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range))
+        // if (Physics.Raycast(GetComponent<Camera>().transform.position, GetComponent<Camera>().transform.forward, out hit, range))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
         {
             panel.active = true;
             GameObject obj = Find_Prefab_Object(hit.collider.gameObject);
@@ -111,6 +116,16 @@ public class FPS_Player : MonoBehaviour
 
     void Update_Camera()
     {
+
+
+
+        //If the user clicks the ` key, switch the camera to a third person view: (Implemented by Vik)
+        if(Input.GetKeyDown("`")) {
+            firstPersonCamera.enabled = !firstPersonCamera.enabled;
+            thirdPersonCamera.enabled = !thirdPersonCamera.enabled;
+        }
+
+
         float mouseX = Input.GetAxis("Mouse X") * horizontalSens;
         float mouseY = Input.GetAxis("Mouse Y") * verticalSens;
 
@@ -118,7 +133,8 @@ public class FPS_Player : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
         yRotation += mouseX;
 
-        camera.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
+        Camera.main.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
+        // GetComponent<Camera>().transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
         transform.eulerAngles = new Vector3(0.0f, yRotation, 0.0f);
     }
 
