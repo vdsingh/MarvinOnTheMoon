@@ -1,0 +1,5 @@
+-Wrote some of the Player scripts including: movement, gravity, jumping
+-Created the design for Gates and Pressure Plates
+-Implemented third person camera switching
+-Wrote the logic for interactive level objects (ex: a pressure plate triggered can open a gate)
+-Implemented the physics and collisions for pressure plates
