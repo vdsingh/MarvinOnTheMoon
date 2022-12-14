@@ -116,7 +116,7 @@ public class FPS_Player : MonoBehaviour
             if (obj.GetComponent<ChangableGravity>() != null)
             {
                 object_gravity.text = "Gravity: " + obj.GetComponent<ChangableGravity>().gravity;
-                if (Input.GetKey(KeyCode.Tab))
+                if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     obj.GetComponent<ChangableGravity>().gravity *= -1;
                 }
