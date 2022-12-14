@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalSens: 1
   verticalSens: 1
+  monkeyBody: {fileID: 8800473122856850813}
   firstPersonCamera: {fileID: 969890643949910217}
   thirdPersonCamera: {fileID: 5350793406152300189}
   object_icon: {fileID: 6199888274399871758}
@@ -1129,5 +1130,10 @@ PrefabInstance:
 --- !u!4 &8172448932756000711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ad15f1233db61424c8c642323d800f8b, type: 3}
+  m_PrefabInstance: {fileID: 8566099912638097452}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8800473122856850813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ad15f1233db61424c8c642323d800f8b, type: 3}
   m_PrefabInstance: {fileID: 8566099912638097452}
   m_PrefabAsset: {fileID: 0}

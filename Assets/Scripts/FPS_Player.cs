@@ -15,6 +15,8 @@ public class FPS_Player : MonoBehaviour
 
     // Components
     private CharacterController characterController;
+    public GameObject monkeyBody;
+    private Animator animator;
     public Camera firstPersonCamera;
     public Camera thirdPersonCamera;
     public RawImage object_icon;
@@ -49,6 +51,9 @@ public class FPS_Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         characterController = gameObject.GetComponent<CharacterController>();
+
+        animator = monkeyBody.GetComponent<Animator>();
+
         Debug.Log(object_icon);
     }
 
@@ -220,7 +225,11 @@ public class FPS_Player : MonoBehaviour
         {
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
             characterController.Move(movementDirection * moveSpeed * Time.deltaTime);
+            animator.SetBool("walkingForward", true);
+        } else {
+            animator.SetBool("walkingForward", false);
         }
+        
         if (Input.GetKey("s"))
         {
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
