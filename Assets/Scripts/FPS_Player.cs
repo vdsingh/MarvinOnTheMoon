@@ -229,23 +229,31 @@ public class FPS_Player : MonoBehaviour
         } else {
             animator.SetBool("walkingForward", false);
         }
-        
+
         if (Input.GetKey("s"))
         {
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
             characterController.Move(-movementDirection * walkingVelocity * Time.deltaTime);
         }
+
         if (Input.GetKey("a"))
         {
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
             movementDirection = Quaternion.Euler(0, -90, 0) * movementDirection;
             characterController.Move(-movementDirection * walkingVelocity * Time.deltaTime * -1);
+            animator.SetBool("walkingLeft", true);
+        } else {
+            animator.SetBool("walkingLeft", false);
         }
+
         if (Input.GetKey("d"))
         {
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
             movementDirection = Quaternion.Euler(0, 90, 0) * movementDirection;
             characterController.Move(movementDirection * walkingVelocity * Time.deltaTime);
+            animator.SetBool("walkingRight", true);
+        } else {
+            animator.SetBool("walkingRight", false);
         }
 
 
