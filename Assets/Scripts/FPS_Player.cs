@@ -28,6 +28,7 @@ public class FPS_Player : MonoBehaviour
     private bool playerIsGrounded;
     private Vector3 playerVelocity;
     private Vector3 movementDirection;
+    private bool isCarryingObject = false;
 
     // Player Constants
     private float range = 100.0f;
@@ -62,11 +63,10 @@ public class FPS_Player : MonoBehaviour
                 return;
             }
         }
-
         Update_Camera();
         HandleMovement();
         Looking_At_Object();
-        Scroll_Wheel_Gravity();
+        // Scroll_Wheel_Gravity();
     }
 
     GameObject Find_Prefab_Object(GameObject obj)
@@ -101,6 +101,40 @@ public class FPS_Player : MonoBehaviour
         gravity_text.text = "Gravity: " + -1 * Mathf.Round(gravityValue * 100) / 100;
     }
 
+    IEnumerator Carry_Object(GameObject obj)
+    {
+        float distance = Vector3.Distance(obj.transform.position, Camera.main.transform.position);
+        while(Input.GetKey(KeyCode.Mouse0))
+        {
+            if(Input.GetAxis("Mouse ScrollWheel") > 0f)
+            {
+                distance += 1.0f;
+            }
+            else if(Input.GetAxis("Mouse ScrollWheel") < 0f)
+            {
+                distance -= 1.0f;
+            }
+            if(distance < 1.0f)
+            {
+                distance = 1.0f;
+            }
+            Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, range);
+            if(hit.collider != null)
+            {
+                GameObject hit_obj = Find_Prefab_Object(hit.collider.gameObject);
+                if(hit_obj != obj)
+                {
+                    distance = Mathf.Min(distance,Vector3.Distance(hit.point, Camera.main.transform.position) - obj.transform.localScale.x);
+                }
+            }
+            obj.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance;
+            yield return null;
+        }
+        obj.GetComponent<ChangableGravity>().ClearVelocity();
+        isCarryingObject = false;
+        yield break;
+    }
+
     void Looking_At_Object()
     {
         RaycastHit hit;
@@ -119,6 +153,11 @@ public class FPS_Player : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     obj.GetComponent<ChangableGravity>().gravity *= -1;
+                }
+                if (!isCarryingObject && Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    isCarryingObject = true;
+                    StartCoroutine(Carry_Object(obj));
                 }
             }
             else

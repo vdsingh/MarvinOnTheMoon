@@ -1,0 +1,3 @@
+-Wrote the player script for moving, camera control
+-Player HUD
+-Carrying objects
