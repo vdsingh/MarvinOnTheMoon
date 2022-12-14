@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 297098016}
-  m_IndirectSpecularColor: {r: 0.002063206, g: 0.0019480612, b: 0.0021180937, a: 1}
+  m_IndirectSpecularColor: {r: 0.0020581514, g: 0.001948524, b: 0.0021128268, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5682,6 +5682,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 115487607400243381, guid: 48754ef038c028e448e42e58ba955a90, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 938760881537064794, guid: 48754ef038c028e448e42e58ba955a90, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5702,6 +5706,14 @@ PrefabInstance:
       propertyPath: fpsCamera
       value: 
       objectReference: {fileID: 1427745038}
+    - target: {fileID: 5676252240448999412, guid: 48754ef038c028e448e42e58ba955a90, type: 3}
+      propertyPath: verticalSens
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676252240448999412, guid: 48754ef038c028e448e42e58ba955a90, type: 3}
+      propertyPath: horizontalSens
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5676252240448999412, guid: 48754ef038c028e448e42e58ba955a90, type: 3}
       propertyPath: firstPersonCamera
       value: 
@@ -5847,7 +5859,6 @@ GameObject:
   - component: {fileID: 1874732514}
   - component: {fileID: 1874732513}
   - component: {fileID: 1874732512}
-  - component: {fileID: 1874732511}
   m_Layer: 0
   m_Name: Area1Wall
   m_TagString: Untagged
@@ -5855,19 +5866,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1874732511
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874732510}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1874732512
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5888,7 +5886,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a94e4919a2a644947a7fd87336643265, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5963,7 +5961,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1555496994}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1999903473
 Camera:
