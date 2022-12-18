@@ -47,6 +47,7 @@ public class FPS_Player : MonoBehaviour
         
         firstPersonCamera.enabled = true;
         thirdPersonCamera.enabled = false;
+        monkeyBody.active = false;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -55,6 +56,11 @@ public class FPS_Player : MonoBehaviour
         animator = monkeyBody.GetComponent<Animator>();
 
         Debug.Log(object_icon);
+    }
+
+    void FixedUpdate()
+    {
+        Update_Camera();
     }
 
     // Update is called once per frame
@@ -68,7 +74,6 @@ public class FPS_Player : MonoBehaviour
                 return;
             }
         }
-        Update_Camera();
         HandleMovement();
         Looking_At_Object();
         // Scroll_Wheel_Gravity();
@@ -178,13 +183,18 @@ public class FPS_Player : MonoBehaviour
 
     void Update_Camera()
     {
-
-
-
         //If the user clicks the ` key, switch the camera to a third person view: (Implemented by Vik)
         if(Input.GetKeyDown("`")) {
             firstPersonCamera.enabled = !firstPersonCamera.enabled;
             thirdPersonCamera.enabled = !thirdPersonCamera.enabled;
+            if(firstPersonCamera.enabled)
+            {
+                monkeyBody.active = false;
+            }
+            else
+            {
+                monkeyBody.active = true;
+            }
         }
 
 
@@ -194,10 +204,14 @@ public class FPS_Player : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
         yRotation += mouseX;
-
-        Camera.main.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
         // GetComponent<Camera>().transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
-        transform.eulerAngles = new Vector3(0.0f, yRotation, 0.0f);
+        if(thirdPersonCamera.enabled) {
+            Camera.main.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
+            transform.eulerAngles = new Vector3(0.0f, yRotation, 0.0f);
+        }
+        else {
+            Camera.main.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
+        }
     }
 
     void HandleMovement()
@@ -209,8 +223,8 @@ public class FPS_Player : MonoBehaviour
         {
             playerVelocity.y = 0f;
         }
-        float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
-        float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
+        float xdirection = Mathf.Sin(Mathf.Deg2Rad * Camera.main.transform.rotation.eulerAngles.y);
+        float zdirection = Mathf.Cos(Mathf.Deg2Rad * Camera.main.transform.rotation.eulerAngles.y);
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
