@@ -25,12 +25,15 @@ public class FPS_Player : MonoBehaviour
     public TMP_Text gravity_text;
     public GameObject panel;
     private GameObject pause_menu;
+    private LineRenderer lineRender;
+    private GameObject gg;
 
     // Player State (Variable)
     private bool playerIsGrounded;
     private Vector3 playerVelocity;
     private Vector3 movementDirection;
     private bool isCarryingObject = false;
+    private GameObject objectCarried;
 
     // Player Constants
     private float range = 100.0f;
@@ -47,14 +50,43 @@ public class FPS_Player : MonoBehaviour
         
         firstPersonCamera.enabled = true;
         thirdPersonCamera.enabled = false;
+        monkeyBody.active = false;
+
+        gg = GameObject.Find("GGParent");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         characterController = gameObject.GetComponent<CharacterController>();
 
         animator = monkeyBody.GetComponent<Animator>();
+        lineRender = gameObject.AddComponent<LineRenderer>();
 
         Debug.Log(object_icon);
+    }
+
+    void FixedUpdate()
+    {
+        Update_Camera();
+        if(isCarryingObject)
+        {   
+            Draw_Laser();
+        }
+        else
+        {
+            lineRender.positionCount = 0;
+        }
+    }
+
+    void Draw_Laser()
+    {
+        lineRender.positionCount = 2;
+        List<Vector3> points = new List<Vector3>();
+        points.Add(GameObject.Find("GravityGunTip").transform.position);
+        points.Add(objectCarried.transform.position);
+        lineRender.startWidth = 0.1f;
+        lineRender.endWidth = 0.1f;
+        lineRender.SetPositions(points.ToArray());
+        lineRender.useWorldSpace = true;
     }
 
     // Update is called once per frame
@@ -68,7 +100,6 @@ public class FPS_Player : MonoBehaviour
                 return;
             }
         }
-        Update_Camera();
         HandleMovement();
         Looking_At_Object();
         // Scroll_Wheel_Gravity();
@@ -108,6 +139,7 @@ public class FPS_Player : MonoBehaviour
 
     IEnumerator Carry_Object(GameObject obj)
     {
+        objectCarried = obj;
         float distance = Vector3.Distance(obj.transform.position, Camera.main.transform.position);
         while(Input.GetKey(KeyCode.Mouse0))
         {
@@ -178,13 +210,20 @@ public class FPS_Player : MonoBehaviour
 
     void Update_Camera()
     {
-
-
-
         //If the user clicks the ` key, switch the camera to a third person view: (Implemented by Vik)
         if(Input.GetKeyDown("`")) {
             firstPersonCamera.enabled = !firstPersonCamera.enabled;
             thirdPersonCamera.enabled = !thirdPersonCamera.enabled;
+            if(firstPersonCamera.enabled)
+            {
+                monkeyBody.active = false;
+                gg.active = true;
+            }
+            else
+            {
+                monkeyBody.active = true;
+                gg.active = false;
+            }
         }
 
 
@@ -194,10 +233,15 @@ public class FPS_Player : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
         yRotation += mouseX;
-
-        Camera.main.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
         // GetComponent<Camera>().transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
-        transform.eulerAngles = new Vector3(0.0f, yRotation, 0.0f);
+        if(thirdPersonCamera.enabled) {
+            Camera.main.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
+            transform.eulerAngles = new Vector3(0.0f, yRotation, 0.0f);
+        }
+        else {
+            Camera.main.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
+            GameObject.Find("GGParent").transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
+        }
     }
 
     void HandleMovement()
@@ -209,8 +253,8 @@ public class FPS_Player : MonoBehaviour
         {
             playerVelocity.y = 0f;
         }
-        float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
-        float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
+        float xdirection = Mathf.Sin(Mathf.Deg2Rad * Camera.main.transform.rotation.eulerAngles.y);
+        float zdirection = Mathf.Cos(Mathf.Deg2Rad * Camera.main.transform.rotation.eulerAngles.y);
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
