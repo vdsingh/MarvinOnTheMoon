@@ -67,7 +67,6 @@ public class FPS_Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        Update_Camera();
         if (isCarryingObject)
         {
             Draw_Laser();
@@ -124,6 +123,7 @@ public class FPS_Player : MonoBehaviour
             gravity_text.text = "";
         }
 
+        Update_Camera();
         HandleMovement();
         Looking_At_Object();
         // Scroll_Wheel_Gravity();
