@@ -34,6 +34,7 @@ public class FPS_Player : MonoBehaviour
     private Vector3 movementDirection;
     private bool isCarryingObject = false;
     private GameObject objectCarried;
+    private bool gravity_mode = false;
 
     // Player Constants
     private float range = 100.0f;
@@ -47,7 +48,7 @@ public class FPS_Player : MonoBehaviour
     void Start()
     {
         pause_menu = GameObject.Find("Pause Menu Controller");
-        
+
         firstPersonCamera.enabled = true;
         thirdPersonCamera.enabled = false;
         monkeyBody.active = false;
@@ -67,8 +68,8 @@ public class FPS_Player : MonoBehaviour
     void FixedUpdate()
     {
         Update_Camera();
-        if(isCarryingObject)
-        {   
+        if (isCarryingObject)
+        {
             Draw_Laser();
         }
         else
@@ -92,14 +93,37 @@ public class FPS_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(pause_menu != null)
+        if (pause_menu != null)
         {
-            if(pause_menu.GetComponent<PauseMenu>().paused)
+            if (pause_menu.GetComponent<PauseMenu>().paused)
             {
                 panel.active = false;
                 return;
             }
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            gravity_mode = !gravity_mode;
+        }
+
+        if (firstPersonCamera.enabled)
+        {
+            if (gravity_mode)
+            {
+                gravity_text.text = "Gravity Mode";
+                GameObject.Find("GravityGun").GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            }
+            else
+            {
+                gravity_text.text = "Carrying Mode";
+                GameObject.Find("GravityGun").GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+            }
+        }
+        else
+        {
+            gravity_text.text = "";
+        }
+
         HandleMovement();
         Looking_At_Object();
         // Scroll_Wheel_Gravity();
@@ -119,49 +143,31 @@ public class FPS_Player : MonoBehaviour
         return obj;
     }
 
-    void Scroll_Wheel_Gravity()
-    {
-        float amount = 0.1f;
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            amount = 1.0f;
-        }
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
-            gravityValue += amount;
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-            gravityValue -= amount;
-        }
-        gravity_text.text = "Gravity: " + -1 * Mathf.Round(gravityValue * 100) / 100;
-    }
-
     IEnumerator Carry_Object(GameObject obj)
     {
         objectCarried = obj;
         float distance = Vector3.Distance(obj.transform.position, Camera.main.transform.position);
-        while(Input.GetKey(KeyCode.Mouse0))
+        while (Input.GetKey(KeyCode.Mouse0) && !gravity_mode)
         {
-            if(Input.GetAxis("Mouse ScrollWheel") > 0f)
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
                 distance += 1.0f;
             }
-            else if(Input.GetAxis("Mouse ScrollWheel") < 0f)
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
             {
                 distance -= 1.0f;
             }
-            if(distance < 1.0f)
+            if (distance < 1.0f)
             {
                 distance = 1.0f;
             }
             Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, range);
-            if(hit.collider != null)
+            if (hit.collider != null)
             {
                 GameObject hit_obj = Find_Prefab_Object(hit.collider.gameObject);
-                if(hit_obj != obj)
+                if (hit_obj != obj)
                 {
-                    distance = Mathf.Min(distance,Vector3.Distance(hit.point, Camera.main.transform.position) - obj.transform.localScale.x);
+                    distance = Mathf.Min(distance, Vector3.Distance(hit.point, Camera.main.transform.position) - obj.transform.localScale.x);
                 }
             }
             obj.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance;
@@ -184,22 +190,25 @@ public class FPS_Player : MonoBehaviour
             object_icon.texture = icon;
             object_name.text = obj.name;
 
-            if (obj.GetComponent<ChangableGravity>() != null)
-            {
-                object_gravity.text = "Gravity: " + obj.GetComponent<ChangableGravity>().gravity;
-                if (Input.GetKeyDown(KeyCode.Tab))
-                {
-                    obj.GetComponent<ChangableGravity>().gravity *= -1;
-                }
-                if (!isCarryingObject && Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    isCarryingObject = true;
-                    StartCoroutine(Carry_Object(obj));
-                }
-            }
-            else
+            if (obj.GetComponent<ChangableGravity>() == null)
             {
                 object_gravity.text = "Gravity: N/A";
+                return;
+            }
+            object_gravity.text = "Gravity: " + obj.GetComponent<ChangableGravity>().gravity * -1.0f;
+            if (gravity_mode && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                obj.GetComponent<ChangableGravity>().gravity -= 1;
+            }
+            if (gravity_mode && Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                obj.GetComponent<ChangableGravity>().gravity += 1;
+                obj.GetComponent<ChangableGravity>().gravity = Mathf.Min(obj.GetComponent<ChangableGravity>().gravity, 0);
+            }
+            if (!isCarryingObject && Input.GetKeyDown(KeyCode.Mouse0) && !gravity_mode)
+            {
+                isCarryingObject = true;
+                StartCoroutine(Carry_Object(obj));
             }
         }
         else
@@ -211,10 +220,11 @@ public class FPS_Player : MonoBehaviour
     void Update_Camera()
     {
         //If the user clicks the ` key, switch the camera to a third person view: (Implemented by Vik)
-        if(Input.GetKeyDown("`")) {
+        if (Input.GetKeyDown("`"))
+        {
             firstPersonCamera.enabled = !firstPersonCamera.enabled;
             thirdPersonCamera.enabled = !thirdPersonCamera.enabled;
-            if(firstPersonCamera.enabled)
+            if (firstPersonCamera.enabled)
             {
                 monkeyBody.active = false;
                 gg.active = true;
@@ -234,11 +244,13 @@ public class FPS_Player : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
         yRotation += mouseX;
         // GetComponent<Camera>().transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
-        if(thirdPersonCamera.enabled) {
+        if (thirdPersonCamera.enabled)
+        {
             Camera.main.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
             transform.eulerAngles = new Vector3(0.0f, yRotation, 0.0f);
         }
-        else {
+        else
+        {
             Camera.main.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
             GameObject.Find("GGParent").transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
         }
@@ -270,7 +282,9 @@ public class FPS_Player : MonoBehaviour
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
             characterController.Move(movementDirection * moveSpeed * Time.deltaTime);
             animator.SetBool("walkingForward", true);
-        } else {
+        }
+        else
+        {
             animator.SetBool("walkingForward", false);
         }
 
@@ -286,7 +300,9 @@ public class FPS_Player : MonoBehaviour
             movementDirection = Quaternion.Euler(0, -90, 0) * movementDirection;
             characterController.Move(-movementDirection * walkingVelocity * Time.deltaTime * -1);
             animator.SetBool("walkingLeft", true);
-        } else {
+        }
+        else
+        {
             animator.SetBool("walkingLeft", false);
         }
 
@@ -296,7 +312,9 @@ public class FPS_Player : MonoBehaviour
             movementDirection = Quaternion.Euler(0, 90, 0) * movementDirection;
             characterController.Move(movementDirection * walkingVelocity * Time.deltaTime);
             animator.SetBool("walkingRight", true);
-        } else {
+        }
+        else
+        {
             animator.SetBool("walkingRight", false);
         }
 
