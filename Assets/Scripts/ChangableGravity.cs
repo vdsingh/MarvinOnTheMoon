@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class ChangableGravity : MonoBehaviour
 {
-    internal float gravity = -1.62f;
+    public float gravity = -1.62f;
     private Rigidbody rb;
+    internal bool ignoreForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,10 @@ public class ChangableGravity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!ignoreForce)
+        {
         rb.AddForce(0, gravity, 0);
+        }
     }
 
     public void ClearVelocity()
