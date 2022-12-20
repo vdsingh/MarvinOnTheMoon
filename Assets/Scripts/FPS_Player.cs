@@ -205,7 +205,8 @@ public class FPS_Player : MonoBehaviour
                 obj.GetComponent<ChangableGravity>().gravity += 1;
                 obj.GetComponent<ChangableGravity>().gravity = Mathf.Min(obj.GetComponent<ChangableGravity>().gravity, 0);
             }
-            if (!isCarryingObject && Input.GetKeyDown(KeyCode.Mouse0) && !gravity_mode)
+            bool carryable = obj.GetComponent<ChangableGravity>().isCarryable;
+            if (!isCarryingObject && Input.GetKeyDown(KeyCode.Mouse0) && !gravity_mode && carryable)
             {
                 isCarryingObject = true;
                 StartCoroutine(Carry_Object(obj));
