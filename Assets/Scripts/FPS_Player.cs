@@ -31,6 +31,8 @@ public class FPS_Player : MonoBehaviour
 
     // Audio Clips
     public AudioClip gun_shot_clip;
+    public AudioClip gun_beam_clip;
+
 
 
 
@@ -221,6 +223,10 @@ public class FPS_Player : MonoBehaviour
             {
                 isCarryingObject = true;
                 StartCoroutine(Carry_Object(obj));
+                audioSource.clip = gun_beam_clip;
+                audioSource.Play();
+            } else if(!gravity_mode && !isCarryingObject){
+                audioSource.Stop();
             }
         }
         else
