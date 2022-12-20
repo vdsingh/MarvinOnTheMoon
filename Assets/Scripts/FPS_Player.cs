@@ -216,7 +216,8 @@ public class FPS_Player : MonoBehaviour
                 audioSource.clip = gun_shot_clip;
                 audioSource.Play();
             }
-            if (!isCarryingObject && Input.GetKeyDown(KeyCode.Mouse0) && !gravity_mode)
+            bool carryable = obj.GetComponent<ChangableGravity>().isCarryable;
+            if (!isCarryingObject && Input.GetKeyDown(KeyCode.Mouse0) && !gravity_mode && carryable)
             {
                 isCarryingObject = true;
                 StartCoroutine(Carry_Object(obj));

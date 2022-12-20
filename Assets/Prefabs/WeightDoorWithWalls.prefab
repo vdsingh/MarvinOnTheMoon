@@ -824,12 +824,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 7856080578286389615}
     m_Modifications:
     - target: {fileID: 974805647795502785, guid: 674fef8bd44fc0541befca9e75f6a0f9, type: 3}
-      propertyPath: ignoreForce
-      value: 1
+      propertyPath: isCarryable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3499900068225015294, guid: 674fef8bd44fc0541befca9e75f6a0f9, type: 3}
-      propertyPath: ignoreForce
-      value: 1
+      propertyPath: isCarryable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4133225291748537634, guid: 674fef8bd44fc0541befca9e75f6a0f9, type: 3}
       propertyPath: m_RootOrder
