@@ -26,7 +26,13 @@ public class FPS_Player : MonoBehaviour
     public GameObject panel;
     private GameObject pause_menu;
     private LineRenderer lineRender;
+    private AudioSource audioSource;
     private GameObject gg;
+
+    // Audio Clips
+    public AudioClip gun_shot_clip;
+
+
 
     // Player State (Variable)
     private bool playerIsGrounded;
@@ -60,6 +66,7 @@ public class FPS_Player : MonoBehaviour
         characterController = gameObject.GetComponent<CharacterController>();
 
         animator = monkeyBody.GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         lineRender = gameObject.AddComponent<LineRenderer>();
 
         Debug.Log(object_icon);
@@ -199,11 +206,15 @@ public class FPS_Player : MonoBehaviour
             if (gravity_mode && Input.GetKeyDown(KeyCode.Mouse0))
             {
                 obj.GetComponent<ChangableGravity>().gravity -= 1;
+                audioSource.clip = gun_shot_clip;
+                audioSource.Play();
             }
             if (gravity_mode && Input.GetKeyDown(KeyCode.Mouse1))
             {
                 obj.GetComponent<ChangableGravity>().gravity += 1;
                 obj.GetComponent<ChangableGravity>().gravity = Mathf.Min(obj.GetComponent<ChangableGravity>().gravity, 0);
+                audioSource.clip = gun_shot_clip;
+                audioSource.Play();
             }
             if (!isCarryingObject && Input.GetKeyDown(KeyCode.Mouse0) && !gravity_mode)
             {
