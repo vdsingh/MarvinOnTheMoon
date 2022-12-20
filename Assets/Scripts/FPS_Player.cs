@@ -293,6 +293,9 @@ public class FPS_Player : MonoBehaviour
         {
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
             characterController.Move(-movementDirection * walkingVelocity * Time.deltaTime);
+            animator.SetBool("walkingBackward", true);
+        } else {
+            animator.SetBool("walkingBackward", false);
         }
 
         if (Input.GetKey("a"))
@@ -324,10 +327,12 @@ public class FPS_Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && playerIsGrounded)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            animator.SetBool("jumping", true);
+        } else if(playerIsGrounded) {
+            animator.SetBool("jumping", false);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerVelocity * Time.deltaTime);
     }
-
 }
