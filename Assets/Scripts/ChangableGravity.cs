@@ -8,7 +8,7 @@ public class ChangableGravity : MonoBehaviour
 {
     public float gravity = -1.62f;
     private Rigidbody rb;
-    internal bool ignoreForce;
+    public bool ignoreForce = false;
     // Start is called before the first frame update
     void Start()
     {
