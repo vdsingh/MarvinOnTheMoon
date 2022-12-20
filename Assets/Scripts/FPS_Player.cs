@@ -27,6 +27,7 @@ public class FPS_Player : MonoBehaviour
     private GameObject pause_menu;
     private LineRenderer lineRender;
     private GameObject gg;
+    public Image health_bar;
 
     // Player State (Variable)
     private bool playerIsGrounded;
@@ -35,6 +36,7 @@ public class FPS_Player : MonoBehaviour
     private bool isCarryingObject = false;
     private GameObject objectCarried;
     private bool gravity_mode = false;
+    private int health = 100;
 
     // Player Constants
     private float range = 100.0f;
@@ -48,7 +50,8 @@ public class FPS_Player : MonoBehaviour
     void Start()
     {
         pause_menu = GameObject.Find("Pause Menu Controller");
-
+        health_bar.color = Color.green;
+        health_bar.fillAmount = 1.0f;
         firstPersonCamera.enabled = true;
         thirdPersonCamera.enabled = false;
         monkeyBody.active = false;
@@ -189,7 +192,7 @@ public class FPS_Player : MonoBehaviour
             Texture2D icon = (Texture2D)AssetPreview.GetAssetPreview(obj);
             object_icon.texture = icon;
             object_name.text = obj.name;
-
+            
             if (obj.GetComponent<ChangableGravity>() == null)
             {
                 object_gravity.text = "Gravity: N/A";
@@ -334,5 +337,19 @@ public class FPS_Player : MonoBehaviour
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerVelocity * Time.deltaTime);
+    }
+
+    internal void Damage()
+    {
+        health -= Random.Range(5, 10);
+        health_bar.fillAmount = (float)health / 100.0f;
+        if(health <= 75)
+        {
+            health_bar.color = Color.yellow;
+        }
+        if(health <= 50)
+        {
+            health_bar.color = Color.red;
+        }
     }
 }

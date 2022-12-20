@@ -21,9 +21,9 @@ public class ChangableGravity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!ignoreForce)
+        if (!ignoreForce)
         {
-        rb.AddForce(0, gravity, 0);
+            rb.AddForce(0, gravity, 0);
         }
     }
 

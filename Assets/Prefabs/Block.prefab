@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2759714712268779914}
   m_Layer: 0
   m_Name: Block
-  m_TagString: Untagged
+  m_TagString: Prefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9b462187d6a37488fbfa1a17db7f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravity: -1.62
+  isCarryable: 1
 --- !u!54 &2759714712268779914
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 3696000757122528351}
   m_Layer: 0
   m_Name: NumberBlock
-  m_TagString: Untagged
+  m_TagString: Prefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1218,4 +1218,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: -1.62
-  ignoreForce: 0
+  isCarryable: 1
