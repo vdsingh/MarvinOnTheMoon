@@ -9,6 +9,7 @@ public class Turret_AI : MonoBehaviour
     public float proj_velocity;
     public float proj_lifespan;
     private float EPSILON, MAX_ITER;
+    private Vector3 prev_player_position;
 
     private IEnumerator Fire()
     {
@@ -31,9 +32,16 @@ public class Turret_AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("VELOCITY: " + player.GetComponent<CharacterController>().velocity);
         Vector3 target_position = getDeflectionPosition(player.transform.position, player.GetComponent<CharacterController>().velocity, transform.position, proj_velocity);
-        transform.LookAt(target_position);
+        if(Mathf.Abs(target_position.x) < 1000000.0f)
+        {
+            transform.LookAt(target_position);
+            prev_player_position = target_position;
+        }
+        else
+        {
+            transform.LookAt(prev_player_position);
+        }
     }
 
     void FireProjectile()

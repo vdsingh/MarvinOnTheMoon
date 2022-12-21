@@ -34,9 +34,6 @@ public class FPS_Player : MonoBehaviour
     public AudioClip gun_shot_clip;
     public AudioClip gun_beam_clip;
 
-
-
-
     // Player State (Variable)
     private bool playerIsGrounded;
     private Vector3 playerVelocity;
@@ -45,6 +42,7 @@ public class FPS_Player : MonoBehaviour
     private GameObject objectCarried;
     private bool gravity_mode = false;
     private int health = 100;
+    private Vector3 velocity = Vector3.zero;
 
     // Player Constants
     private float range = 100.0f;
@@ -293,8 +291,9 @@ public class FPS_Player : MonoBehaviour
     void HandleMovement()
     {
         playerIsGrounded = characterController.isGrounded;
-        float moveSpeed;
 
+        playerVelocity.x = 0;
+        playerVelocity.z = 0;
         if (playerIsGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -302,19 +301,17 @@ public class FPS_Player : MonoBehaviour
         float xdirection = Mathf.Sin(Mathf.Deg2Rad * Camera.main.transform.rotation.eulerAngles.y);
         float zdirection = Mathf.Cos(Mathf.Deg2Rad * Camera.main.transform.rotation.eulerAngles.y);
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            moveSpeed = runningVelocity;
-        }
-        else
-        {
-            moveSpeed = walkingVelocity;
-        }
-
         if (Input.GetKey("w"))
         {
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
-            characterController.Move(movementDirection * moveSpeed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                playerVelocity += movementDirection * runningVelocity;
+            }
+            else
+            {
+                playerVelocity += movementDirection * walkingVelocity;
+            }
             animator.SetBool("walkingForward", true);
         }
         else
@@ -325,7 +322,7 @@ public class FPS_Player : MonoBehaviour
         if (Input.GetKey("s"))
         {
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
-            characterController.Move(-movementDirection * walkingVelocity * Time.deltaTime);
+            playerVelocity -= movementDirection * walkingVelocity;
             animator.SetBool("walkingBackward", true);
         }
         else
@@ -337,7 +334,7 @@ public class FPS_Player : MonoBehaviour
         {
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
             movementDirection = Quaternion.Euler(0, -90, 0) * movementDirection;
-            characterController.Move(-movementDirection * walkingVelocity * Time.deltaTime * -1);
+            playerVelocity += movementDirection * walkingVelocity;
             animator.SetBool("walkingLeft", true);
         }
         else
@@ -349,7 +346,7 @@ public class FPS_Player : MonoBehaviour
         {
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
             movementDirection = Quaternion.Euler(0, 90, 0) * movementDirection;
-            characterController.Move(movementDirection * walkingVelocity * Time.deltaTime);
+            playerVelocity += movementDirection * walkingVelocity;
             animator.SetBool("walkingRight", true);
         }
         else
