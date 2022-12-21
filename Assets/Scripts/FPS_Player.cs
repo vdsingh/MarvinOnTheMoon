@@ -214,6 +214,8 @@ public class FPS_Player : MonoBehaviour
                 if (gravity_mode && Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     obj.GetComponent<ChangableGravity>().gravity -= 1;
+                    float maxGravity = obj.GetComponent<ChangableGravity>().maxGravity;
+                    obj.GetComponent<ChangableGravity>().gravity = Mathf.Max(obj.GetComponent<ChangableGravity>().gravity, maxGravity);
                     audioSource.clip = gun_shot_clip;
                     audioSource.Play();
                 }
