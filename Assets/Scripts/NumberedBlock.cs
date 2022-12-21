@@ -6,7 +6,7 @@ using TMPro;
 
 public class NumberedBlock : MonoBehaviour
 {
-    public GameObject block;
+    // public GameObject block;
     public GameObject face1;
     public GameObject face2;
     public GameObject face3;
@@ -24,7 +24,7 @@ public class NumberedBlock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grav = block.GetComponent<ChangableGravity>();
+        grav = gameObject.GetComponent<ChangableGravity>();
         text1 = face1.GetComponent<TextMeshPro>();
         text2 = face2.GetComponent<TextMeshPro>();
         text3 = face3.GetComponent<TextMeshPro>();
