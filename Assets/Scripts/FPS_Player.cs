@@ -46,7 +46,7 @@ public class FPS_Player : MonoBehaviour
     private bool gravity_mode = false;
     public int health = 100;
     private Vector3 velocity = Vector3.zero;
-    private bool gameOver = false;
+    internal bool gameOver = false;
 
     // Player Constants
     private float range = 100.0f;

@@ -21,6 +21,8 @@ public class NumberedBlock : MonoBehaviour
     private TextMeshPro text5;
     private TextMeshPro text6;
 
+    public Vector3 startPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class NumberedBlock : MonoBehaviour
         text4 = face4.GetComponent<TextMeshPro>();
         text5 = face5.GetComponent<TextMeshPro>();
         text6 = face6.GetComponent<TextMeshPro>();
-        
+        startPos = transform.position;
     }
 
     // Update is called once per frame
