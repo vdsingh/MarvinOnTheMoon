@@ -61,9 +61,9 @@ MonoBehaviour:
   object_gravity: {fileID: 6412158282005504620}
   gravity_text: {fileID: 4487274056279238346}
   panel: {fileID: 6157700023465751899}
+  health_bar: {fileID: 5468831057560900395}
   gun_shot_clip: {fileID: 8300000, guid: a2530ade1f9494a278f7192eb443a9e9, type: 3}
   gun_beam_clip: {fileID: 8300000, guid: 6984335ffdaf84e6dadf224779e6f7b0, type: 3}
-  health_bar: {fileID: 5468831057560900395}
 --- !u!143 &5584581310524048003
 CharacterController:
   m_ObjectHideFlags: 0
