@@ -17,7 +17,7 @@ public class Turret_AI : MonoBehaviour
     {
         while (true)
         {
-            if (line_of_sight)
+            if (line_of_sight && player.GetComponent<FPS_Player>().health > 0)
             {
                 FireProjectile();
             }

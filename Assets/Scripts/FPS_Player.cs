@@ -34,6 +34,8 @@ public class FPS_Player : MonoBehaviour
     // Audio Clips
     public AudioClip gun_shot_clip;
     public AudioClip gun_beam_clip;
+    public AudioClip monkey_hurt_clip;
+
 
     // Player State (Variable)
     private bool playerIsGrounded;
@@ -42,9 +44,9 @@ public class FPS_Player : MonoBehaviour
     private bool isCarryingObject = false;
     private GameObject objectCarried;
     private bool gravity_mode = false;
-    private int health = 100;
+    public int health = 100;
     private Vector3 velocity = Vector3.zero;
-    private bool hasWon = false;
+    private bool gameOver = false;
 
     // Player Constants
     private float range = 100.0f;
@@ -80,7 +82,7 @@ public class FPS_Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(hasWon) {
+        if(gameOver) {
             return;
         }
 
@@ -109,7 +111,7 @@ public class FPS_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(hasWon) {
+        if(gameOver) {
             return;
         }
 
@@ -388,6 +390,8 @@ public class FPS_Player : MonoBehaviour
 
     internal void Damage()
     {
+        audioSource.clip = monkey_hurt_clip;
+        audioSource.Play();
         health -= Random.Range(5, 10);
         health_bar.fillAmount = (float)health / 100.0f;
         if (health <= 75)
@@ -397,6 +401,10 @@ public class FPS_Player : MonoBehaviour
         if (health <= 50)
         {
             health_bar.color = Color.red;
+        }
+
+        if(health <= 0) { 
+            Defeat();
         }
     }
 
@@ -422,7 +430,22 @@ public class FPS_Player : MonoBehaviour
         ResetAnimationBools();
         animator.SetBool("dancing", true);
 
-        hasWon = true;
+        gameOver = true;
+    }
 
+    private void Defeat() {
+        firstPersonCamera.enabled = false;
+        thirdPersonCamera.enabled = true;
+
+        thirdPersonCamera.GetComponent<Transform>().localPosition = new Vector3(0, 4.0f, 6.0f);
+        thirdPersonCamera.GetComponent<Transform>().rotation = Quaternion.Euler(20.0f, 180.0f, 0.0f);
+
+        monkeyBody.active = true;
+        gg.active = false;
+
+        ResetAnimationBools();
+        animator.SetBool("dying", true);
+
+        gameOver = true;
     }
 }
