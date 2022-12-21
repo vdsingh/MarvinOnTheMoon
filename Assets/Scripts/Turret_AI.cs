@@ -10,6 +10,7 @@ public class Turret_AI : MonoBehaviour
     public float proj_lifespan;
     private float EPSILON, MAX_ITER;
     private Vector3 prev_player_position;
+    private bool line_of_sight;
 
     private IEnumerator Fire()
     {
@@ -41,6 +42,20 @@ public class Turret_AI : MonoBehaviour
         else
         {
             transform.LookAt(prev_player_position);
+        }
+        RaycastHit hit;
+        Vector3 direction = player.transform.position - transform.position;
+        direction.Normalize();
+        if(Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity))
+        {
+            if(hit.collider.gameObject.name == "Player")
+            {
+                line_of_sight = true;
+            }
+            else
+            {
+                line_of_sight = false;
+            }
         }
     }
 
