@@ -50,7 +50,7 @@ public class FPS_Player : MonoBehaviour
     private float range = 100.0f;
     private float walkingVelocity = 15.0f;
     private float runningVelocity = 30.0f;
-    private float jumpHeight = 10.0f;
+    private float jumpHeight = 3.0f;
     private float gravityValue = -1.62f; // This is the moon's gravity
 
 
