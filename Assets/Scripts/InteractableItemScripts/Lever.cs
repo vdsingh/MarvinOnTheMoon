@@ -24,7 +24,7 @@ public class Lever : MonoBehaviour
         wasOn = false;
         isOn = false;
         grav = leverBox.GetComponent<ChangableGravity>();
-        leverOff.Invoke();
+        //leverOff.Invoke();
     }
 
     // Update is called once per frame
@@ -41,7 +41,6 @@ public class Lever : MonoBehaviour
 
         if(isOn && handle.transform.rotation.x <= 0.45f)
         {
-            Debug.Log(handle.transform.rotation.x);
             handle.transform.RotateAround(pivotPoint.position, Vector3.right, 50 * Time.deltaTime);
         }
 

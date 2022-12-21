@@ -15,7 +15,7 @@ public class BasicDoor : MonoBehaviour
     public int numConditionsToMeet = 1;
     private int numConditions = 0;
 
-    private float doorSpeed = 0.05f;
+    private float doorSpeed = 5.0f;
 
     [SerializeField] private UnityEvent numConditionsMet;
     [SerializeField] private UnityEvent numConditionsNotMet;
@@ -37,13 +37,13 @@ public class BasicDoor : MonoBehaviour
     {
         if(isOpen && door.transform.localPosition.y < 7.0f)
         {
-            door.transform.localPosition += new Vector3(0, doorSpeed * Time.time, 0);
+            door.transform.localPosition += new Vector3(0, doorSpeed * Time.deltaTime, 0);
         }
         else
         {
             if(!isOpen && door.transform.localPosition.y > 0.0f)
             {
-                door.transform.localPosition -= new Vector3(0, doorSpeed * Time.time, 0);
+                door.transform.localPosition -= new Vector3(0, doorSpeed * Time.deltaTime, 0);
             }
         }
     }
