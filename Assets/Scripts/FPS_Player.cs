@@ -171,7 +171,7 @@ public class FPS_Player : MonoBehaviour
             if (hit.collider != null)
             {
                 GameObject hit_obj = Find_Prefab_Object(hit.collider.gameObject);
-                if (hit_obj != obj)
+                if (hit_obj != obj && hit_obj.GetComponent<TextMeshPro>() == null && hit_obj.name != "Player")
                 {
                     distance = Mathf.Min(distance, Vector3.Distance(hit.point, Camera.main.transform.position) - obj.transform.localScale.x);
                 }
