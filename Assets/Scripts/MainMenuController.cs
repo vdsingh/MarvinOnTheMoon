@@ -7,20 +7,34 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
     public string levelOne;
-    private string selectedLevel;
 
     public void NewGameYes()
     {
-        SceneManager.LoadScene(levelOne);
-    }
-
-    public void LevelSelect()
-    {
-        SceneManager.LoadScene(selectedLevel);
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void loadTwo()
+    {
+        SceneManager.LoadScene("Aidan Level 1");
+    }
+
+    public void loadThree()
+    {
+        SceneManager.LoadScene("Aidan Level 2");
+    }
+
+    public void loadFour()
+    {
+        SceneManager.LoadScene("Vik's Level");
+    }
+
+    public void loadFive()
+    {
+        SceneManager.LoadScene("Ryan's Level");
     }
 }

@@ -9,8 +9,6 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] private GameObject pauseMenu;
 
-    [SerializeField] private GameObject optionsPanel;
-
     [SerializeField] private GameObject controlsPanel;
 
     [SerializeField] internal bool paused;
@@ -25,7 +23,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(!optionsPanel.activeSelf && !controlsPanel.activeSelf)
+            if(!controlsPanel.activeSelf)
             {
                 paused = !paused;
                 if (paused)
