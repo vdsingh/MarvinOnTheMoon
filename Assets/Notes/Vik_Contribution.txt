@@ -3,3 +3,4 @@
 -Implemented third person camera switching
 -Wrote the logic for interactive level objects (ex: a pressure plate triggered can open a gate)
 -Implemented the physics and collisions for pressure plates
+-Added Animations including: Idle, Walk Forward, Walk Backward, Walk Left, Walk Right, 
