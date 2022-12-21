@@ -10,7 +10,7 @@ public class Turret_AI : MonoBehaviour
     public float proj_lifespan;
     private float EPSILON, MAX_ITER;
     private Vector3 prev_player_position;
-    private bool line_of_sight;
+    private bool line_of_sight = false;
 
     private IEnumerator Fire()
     {
@@ -19,8 +19,8 @@ public class Turret_AI : MonoBehaviour
             if (line_of_sight)
             {
                 FireProjectile();
-                yield return new WaitForSeconds(1.0f / fire_rate);
             }
+            yield return new WaitForSeconds(1.0f / fire_rate);
         }
     }
 
