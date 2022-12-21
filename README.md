@@ -1,13 +1,31 @@
-# MarvinOnTheMoon
+# Contributions
 
-Once upon a time, a mischievous monkey named Marvin found himself on a spaceship that was bound for the moon. As the ship made its way through the vast expanse of space, Marvin grew more and more excited at the thought of exploring the moon's surface.
+## Vik
+- Wrote some of the Player scripts including: movement, gravity, jumping
+- Created the design for Gates and Pressure Plates
+- Implemented third person camera switching
+- Wrote logic for some interactive level objects (ex: a pressure plate triggered can open a gate)
+- Implemented the physics and collisions for pressure plates
+- Added Animations including: Idle, Walk Forward, Walk Backward, Walk Left, Walk Right 
+- Added sound effects and music
+- Created 2 levels (Vik's Level & Tutorial)
 
-But when the ship finally landed on the moon, Marvin's excitement quickly turned to dismay as he realized that he had been left behind by the rest of the crew. He was all alone on the barren, desolate moon, with no way to contact anyone on Earth.
+## Ryan
+- Wrote the player script for moving, camera control
+- Player HUD
+- Carrying objects
+- Gravity Gun
+- Turret
+- AI Robot
+- Game Over UI
+- Created 1 Level (Ryan's Level)
+- Added transitions between levels
 
-At first, Marvin was terrified. He had never been so far from home, and he had no idea how he was going to survive. But as time went on, Marvin began to adapt to his new surroundings. He learned to collect water and food, and even managed to build himself a small shelter out of rocks and moon dust.
-
-Despite the challenges, Marvin began to enjoy his life on the moon. He spent his days exploring the rugged terrain, and his nights gazing up at the stars. Over time, he even began to make friends with some of the other creatures that lived on the moon.
-
-But despite his newfound happiness, Marvin never forgot about Earth. He longed to return home and see his friends and family again. And after many long years on the moon, Marvin finally got his wish.
-
-One day, a group of astronauts from Earth landed on the moon, and Marvin was able to hitch a ride back home. As the spaceship made its way back to Earth, Marvin couldn't help but think about all the amazing adventures he had experienced on the moon. He knew that he would never forget his time on the moon, and he couldn't wait to tell all his friends about his incredible journey.
+## Aidan
+- Wrote the scripts in InteractiveItemScripts (Vik also contributed some changes to these scripts)
+- Main Menu and MainMenuController script
+- Pause Menu and PauseMenuController script
+- Numbered Block and associated script
+- Created BasicDoor, Lever, CeilingButton, WeightDoor, Scale, WeightScale and PauseMenu prefabs
+- Created 2 levels (Aidan Level 1 & 2)
+- Some Main Menu elements follow a tutorial: https://youtu.be/Cq_Nnw_LwnI
