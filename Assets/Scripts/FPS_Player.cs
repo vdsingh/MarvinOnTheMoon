@@ -409,6 +409,9 @@ public class FPS_Player : MonoBehaviour
         firstPersonCamera.enabled = false;
         thirdPersonCamera.enabled = true;
 
+        thirdPersonCamera.GetComponent<Transform>().localPosition = new Vector3(0, 4.0f, 6.0f);
+        thirdPersonCamera.GetComponent<Transform>().rotation = Quaternion.Euler(20.0f, 180.0f, 0.0f);
+
         monkeyBody.active = true;
         gg.active = false;
 

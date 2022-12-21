@@ -60,6 +60,7 @@ public class MathScale : MonoBehaviour
             wrongWeight.Invoke();
             prevMade = madeWeight;
         }
+        UpdateLabel();
     }
 
 
@@ -76,6 +77,15 @@ public class MathScale : MonoBehaviour
         if(other.gameObject.GetComponent<ChangableGravity>() != null)
         {
             weights.Remove(other.gameObject);
+        }
+    }
+
+    void UpdateLabel() {
+        if(showWeight)
+        {
+            displayText.text = "Required Weight:\n" + requiredWeight.ToString();
+        } else {
+            displayText.text = "Current Weight:\n" + totalWeight.ToString();
         }
     }
 }
