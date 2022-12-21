@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 854290180}
-  m_IndirectSpecularColor: {r: 0.5046606, g: 0.44015965, b: 0.44689035, a: 1}
+  m_IndirectSpecularColor: {r: 0.5046591, g: 0.44015735, b: 0.44688773, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1308,9 +1308,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 741687640}
     m_Modifications:
+    - target: {fileID: 6612066223196580134, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
+      propertyPath: gravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8633430644438051597, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
       propertyPath: m_Name
       value: Lever
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633430644438051826, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
+      propertyPath: requiredGrav
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8633430644438051826, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
       propertyPath: leverOn.m_PersistentCalls.m_Calls.Array.size
@@ -4918,9 +4926,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 226712270}
     m_Modifications:
+    - target: {fileID: 6612066223196580134, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
+      propertyPath: gravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8633430644438051597, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
       propertyPath: m_Name
       value: Lever
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633430644438051826, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
+      propertyPath: requiredGrav
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8633430644438051826, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
       propertyPath: leverOn.m_PersistentCalls.m_Calls.Array.size
@@ -7591,9 +7607,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2078028824}
     m_Modifications:
+    - target: {fileID: 6612066223196580134, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
+      propertyPath: gravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8633430644438051597, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
       propertyPath: m_Name
       value: Lever
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633430644438051826, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
+      propertyPath: requiredGrav
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8633430644438051826, guid: f43e5ffd0a3d49647bc98f4f7c99b0df, type: 3}
       propertyPath: leverOn.m_PersistentCalls.m_Calls.Array.size
