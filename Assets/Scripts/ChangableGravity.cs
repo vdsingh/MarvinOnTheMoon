@@ -11,6 +11,7 @@ public class ChangableGravity : MonoBehaviour
     internal bool ignoreForce;
     public bool isCarryable = true;
     public bool isChangeable = true;
+    public float maxGravity = -20.0f;
 
     // Start is called before the first frame update
     void Start()

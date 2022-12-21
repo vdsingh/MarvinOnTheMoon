@@ -8,6 +8,7 @@ public class Turret_AI : MonoBehaviour
     public float fire_rate;
     public float proj_velocity;
     public float proj_lifespan;
+    private float EPSILON, MAX_ITER;
 
     private IEnumerator Fire()
     {
@@ -23,12 +24,16 @@ public class Turret_AI : MonoBehaviour
     {
         player = GameObject.Find("Player");
         StartCoroutine("Fire");
+        EPSILON = 0.01f;
+        MAX_ITER = 1000;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(player.transform);
+        Debug.Log("VELOCITY: " + player.GetComponent<CharacterController>().velocity);
+        Vector3 target_position = getDeflectionPosition(player.transform.position, player.GetComponent<CharacterController>().velocity, transform.position, proj_velocity);
+        transform.LookAt(target_position);
     }
 
     void FireProjectile()
@@ -39,6 +44,21 @@ public class Turret_AI : MonoBehaviour
         projectile.GetComponent<Turret_Projectile>().direction = transform.forward;
         projectile.GetComponent<Turret_Projectile>().lifespan = proj_lifespan;
     }
+
+    private Vector3 getDeflectionPosition(Vector3 target_position, Vector3 target_velocity, Vector3 proj_origin, float proj_speed)
+    {
+        float t = 0.0f;
+        for(int iteration = 0; iteration < MAX_ITER; ++iteration)
+        {
+            float old_t = t;
+            t = Vector3.Distance(proj_origin, target_position + target_velocity * t) / proj_speed;
+            if(Mathf.Abs(t - old_t) < EPSILON)
+            {
+                break;
+            }
+        }
+        return target_position + target_velocity * t;
+    } 
 
     public void EnableTurret()
     {
