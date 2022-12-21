@@ -4,5 +4,23 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 33e78953588f43442907c094d21a2ccc
+  - enabled: 1
+    path: Assets/Scenes/Levels/Tutorial.unity
+    guid: 4a158d7499cd346c89ef89e5fa789ae5
+  - enabled: 1
+    path: Assets/Scenes/Levels/Aidan Level 1.unity
+    guid: 9fa5b1631985c264fb960abfaed90a99
+  - enabled: 1
+    path: Assets/Scenes/Levels/Aidan Level 2.unity
+    guid: fc96ca4e6c2827740be01d920eba1163
+  - enabled: 1
+    path: Assets/Scenes/Levels/Vik's Level.unity
+    guid: 50fbaa63f8dd44a949f49738212d5734
+  - enabled: 1
+    path: Assets/Scenes/Levels/Ryan's Level.unity
+    guid: 96fe2cda04fecce458b0794a28581e2c
   m_configObjects: {}
