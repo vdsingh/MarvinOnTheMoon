@@ -28,6 +28,7 @@ public class FPS_Player : MonoBehaviour
     private LineRenderer lineRender;
     private AudioSource audioSource;
     private GameObject gg;
+    private Vector3 gg_original_pos;
     public Image health_bar;
 
     // Audio Clips
@@ -64,6 +65,7 @@ public class FPS_Player : MonoBehaviour
         monkeyBody.active = false;
 
         gg = GameObject.Find("GGParent");
+        gg_original_pos = gg.transform.localPosition;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -271,12 +273,14 @@ public class FPS_Player : MonoBehaviour
             if (firstPersonCamera.enabled)
             {
                 monkeyBody.active = false;
-                gg.active = true;
+                gg.transform.localPosition = gg_original_pos;
+                // gg.active = true;
             }
             else
             {
                 monkeyBody.active = true;
-                gg.active = false;
+                gg.transform.localPosition = new Vector3(0.0f, 2.4f, 0.33f);
+                // gg.active = false;
             }
         }
 
