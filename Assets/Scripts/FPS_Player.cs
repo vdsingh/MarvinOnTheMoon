@@ -215,6 +215,7 @@ public class FPS_Player : MonoBehaviour
                     float maxGravity = obj.GetComponent<ChangableGravity>().maxGravity;
                     obj.GetComponent<ChangableGravity>().gravity = Mathf.Max(obj.GetComponent<ChangableGravity>().gravity, maxGravity);
                     audioSource.clip = gun_shot_clip;
+                    audioSource.volume = 0.1f;
                     audioSource.Play();
                 }
                 if (gravity_mode && Input.GetKeyDown(KeyCode.Mouse1))
@@ -222,6 +223,7 @@ public class FPS_Player : MonoBehaviour
                     obj.GetComponent<ChangableGravity>().gravity += 1;
                     obj.GetComponent<ChangableGravity>().gravity = Mathf.Min(obj.GetComponent<ChangableGravity>().gravity, 0);
                     audioSource.clip = gun_shot_clip;
+                    audioSource.volume = 0.1f;
                     audioSource.Play();
                 }
             }
@@ -236,6 +238,7 @@ public class FPS_Player : MonoBehaviour
                 isCarryingObject = true;
                 StartCoroutine(Carry_Object(obj));
                 audioSource.clip = gun_beam_clip;
+                audioSource.volume = 0.6f;
                 audioSource.Play();
             }
             else if (!gravity_mode && !isCarryingObject)
