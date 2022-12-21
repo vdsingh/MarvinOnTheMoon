@@ -8,6 +8,9 @@ public class CeilingButton : MonoBehaviour
     [SerializeField] private UnityEvent pressed;
     [SerializeField] private UnityEvent released;
     // Start is called before the first frame update
+
+    public GameObject pressurePlate;
+
     void Start()
     {
         
@@ -22,10 +25,12 @@ public class CeilingButton : MonoBehaviour
     void OnTriggerEnter()
     {
         pressed.Invoke();
+        pressurePlate.GetComponent<Renderer>().material.color = Color.green;
     }
 
     void OnTriggerExit()
     {
         released.Invoke();
+        pressurePlate.GetComponent<Renderer>().material.color = Color.red;
     }
 }

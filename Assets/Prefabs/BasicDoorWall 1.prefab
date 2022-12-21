@@ -381,8 +381,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicDoor
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3155650729188845401, guid: 5c464642554518e4699bdb2c5cea3de7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c464642554518e4699bdb2c5cea3de7, type: 3}
 --- !u!4 &8830767636532061075 stripped
 Transform:
