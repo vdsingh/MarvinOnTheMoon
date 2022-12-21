@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 7961977560115493876}
   m_Layer: 0
   m_Name: NumberedBlockFix
-  m_TagString: Untagged
+  m_TagString: Prefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,6 +296,7 @@ MonoBehaviour:
   gravity: -1
   isCarryable: 1
   isChangeable: 1
+  maxGravity: -20
 --- !u!65 &7961977560115493883
 BoxCollider:
   m_ObjectHideFlags: 0

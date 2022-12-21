@@ -27,7 +27,7 @@ public class MathScale : MonoBehaviour
         {
             displayText.text = "Required Weight:\n" + requiredWeight.ToString();
         }
-        else
+        else if (altText != "")
         {
             displayText.text = altText;
         }
