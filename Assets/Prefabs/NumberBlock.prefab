@@ -770,9 +770,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9b462187d6a37488fbfa1a17db7f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: -1.62
+  gravity: -1
   isCarryable: 1
   isChangeable: 1
+  maxGravity: -20
 --- !u!65 &1058465709566045931
 BoxCollider:
   m_ObjectHideFlags: 0
