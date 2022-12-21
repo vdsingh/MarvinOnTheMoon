@@ -1,3 +1,9 @@
 -Wrote the player script for moving, camera control
 -Player HUD
 -Carrying objects
+-Gravity Gun
+-Turret
+-AI Robot
+-Game Over UI
+-Created 1 Level
+-Added transitions between levels
