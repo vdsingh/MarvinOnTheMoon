@@ -1,0 +1,19 @@
+Scripts: 
+- All scripts in InteractableItemScripts (Vik also contributed changes to these scripts)
+- Main Menu Controller
+- PauseMenu
+- NumberedBlock
+
+Scenes:
+- Aidan Level 1
+- Aidan Level 2
+- Main Menu
+
+Prefabs:
+- BasicDoor
+- Lever
+- CeilingButton
+- WeightDoor
+- NumberBlock + NumberedBlockFix
+- Scale + WeightScale
+- Pause Menu
