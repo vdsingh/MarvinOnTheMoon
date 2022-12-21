@@ -35,4 +35,15 @@ public class Turret_AI : MonoBehaviour
         projectile.GetComponent<Turret_Projectile>().velocity = 10.0f;
         projectile.GetComponent<Turret_Projectile>().direction = transform.forward;
     }
+
+    internal void EnableTurret()
+    {
+        StopCoroutine("Fire");
+    }
+
+    internal void DisableTurret()
+    {
+        StartCoroutine("Fire");
+    }
+
 }
