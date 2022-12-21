@@ -5,13 +5,16 @@ using UnityEngine;
 public class Turret_AI : MonoBehaviour
 {
     private GameObject player;
+    public float fire_rate;
+    public float proj_velocity;
+    public float proj_lifespan;
 
     private IEnumerator Fire()
     {
         while (true)
         {
             FireProjectile();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(1.0f/fire_rate);
         }
     }
 
@@ -32,16 +35,17 @@ public class Turret_AI : MonoBehaviour
     {
         GameObject projectile = Instantiate(Resources.Load("TurretProjectile")) as GameObject;
         projectile.transform.position = transform.position;
-        projectile.GetComponent<Turret_Projectile>().velocity = 10.0f;
+        projectile.GetComponent<Turret_Projectile>().velocity = proj_velocity;
         projectile.GetComponent<Turret_Projectile>().direction = transform.forward;
+        projectile.GetComponent<Turret_Projectile>().lifespan = proj_lifespan;
     }
 
-    internal void EnableTurret()
+    public void EnableTurret()
     {
         StopCoroutine("Fire");
     }
 
-    internal void DisableTurret()
+    public void DisableTurret()
     {
         StartCoroutine("Fire");
     }

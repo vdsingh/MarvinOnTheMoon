@@ -8,6 +8,7 @@ public class Turret_Projectile : MonoBehaviour
     public float velocity;
     public Vector3 direction;
     private bool collided_with_player;
+    public float lifespan;
     
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,7 @@ public class Turret_Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - birth_time > 10.0f)
+        if(Time.time - birth_time > lifespan)
         {
             Destroy(gameObject);
         }

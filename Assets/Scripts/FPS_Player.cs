@@ -169,10 +169,6 @@ public class FPS_Player : MonoBehaviour
             {
                 distance -= 1.0f;
             }
-            if (distance < 1.0f)
-            {
-                distance = 1.0f;
-            }
             Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, range);
             if (hit.collider != null)
             {
@@ -181,6 +177,10 @@ public class FPS_Player : MonoBehaviour
                 {
                     distance = Mathf.Min(distance, Vector3.Distance(hit.point, Camera.main.transform.position) - obj.transform.localScale.x);
                 }
+            }
+            if (distance < 1.0f)
+            {
+                distance = 1.0f;
             }
             obj.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance;
             yield return null;
@@ -201,25 +201,34 @@ public class FPS_Player : MonoBehaviour
             Texture2D icon = (Texture2D)AssetPreview.GetAssetPreview(obj);
             object_icon.texture = icon;
             object_name.text = obj.name;
-            
+
             if (obj.GetComponent<ChangableGravity>() == null)
             {
                 object_gravity.text = "Gravity: N/A";
                 return;
             }
             object_gravity.text = "Gravity: " + obj.GetComponent<ChangableGravity>().gravity * -1.0f;
-            if (gravity_mode && Input.GetKeyDown(KeyCode.Mouse0))
+            if (obj.GetComponent<ChangableGravity>().isChangeable)
             {
-                obj.GetComponent<ChangableGravity>().gravity -= 1;
-                audioSource.clip = gun_shot_clip;
-                audioSource.Play();
+                object_gravity.text += " (Changeable)";
+                if (gravity_mode && Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    obj.GetComponent<ChangableGravity>().gravity -= 1;
+                    audioSource.clip = gun_shot_clip;
+                    audioSource.Play();
+                }
+                if (gravity_mode && Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    obj.GetComponent<ChangableGravity>().gravity += 1;
+                    obj.GetComponent<ChangableGravity>().gravity = Mathf.Min(obj.GetComponent<ChangableGravity>().gravity, 0);
+                    audioSource.clip = gun_shot_clip;
+                    audioSource.Play();
+                }
             }
-            if (gravity_mode && Input.GetKeyDown(KeyCode.Mouse1))
+            else
             {
-                obj.GetComponent<ChangableGravity>().gravity += 1;
-                obj.GetComponent<ChangableGravity>().gravity = Mathf.Min(obj.GetComponent<ChangableGravity>().gravity, 0);
-                audioSource.clip = gun_shot_clip;
-                audioSource.Play();
+
+                object_gravity.text += " (Locked)";
             }
             bool carryable = obj.GetComponent<ChangableGravity>().isCarryable;
             if (!isCarryingObject && Input.GetKeyDown(KeyCode.Mouse0) && !gravity_mode && carryable)
@@ -228,7 +237,9 @@ public class FPS_Player : MonoBehaviour
                 StartCoroutine(Carry_Object(obj));
                 audioSource.clip = gun_beam_clip;
                 audioSource.Play();
-            } else if(!gravity_mode && !isCarryingObject){
+            }
+            else if (!gravity_mode && !isCarryingObject)
+            {
                 audioSource.Stop();
             }
         }
@@ -314,7 +325,9 @@ public class FPS_Player : MonoBehaviour
             movementDirection = new Vector3(xdirection, 0.0f, zdirection);
             characterController.Move(-movementDirection * walkingVelocity * Time.deltaTime);
             animator.SetBool("walkingBackward", true);
-        } else {
+        }
+        else
+        {
             animator.SetBool("walkingBackward", false);
         }
 
@@ -348,7 +361,9 @@ public class FPS_Player : MonoBehaviour
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             animator.SetBool("jumping", true);
-        } else if(playerIsGrounded) {
+        }
+        else if (playerIsGrounded)
+        {
             animator.SetBool("jumping", false);
         }
 
@@ -360,11 +375,11 @@ public class FPS_Player : MonoBehaviour
     {
         health -= Random.Range(5, 10);
         health_bar.fillAmount = (float)health / 100.0f;
-        if(health <= 75)
+        if (health <= 75)
         {
             health_bar.color = Color.yellow;
         }
-        if(health <= 50)
+        if (health <= 50)
         {
             health_bar.color = Color.red;
         }

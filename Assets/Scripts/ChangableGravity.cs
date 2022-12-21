@@ -10,6 +10,7 @@ public class ChangableGravity : MonoBehaviour
     private Rigidbody rb;
     internal bool ignoreForce;
     public bool isCarryable = true;
+    public bool isChangeable = true;
 
     // Start is called before the first frame update
     void Start()
