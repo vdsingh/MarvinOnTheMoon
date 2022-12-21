@@ -43,6 +43,8 @@ public class NumberedBlock : MonoBehaviour
         text3.text = gNum;  
         text4.text = gNum;  
         text5.text = gNum;  
-        text6.text = gNum;        
+        text6.text = gNum;
+        
+        gameObject.GetComponent<Renderer>().material.color = new Color(-grav.gravity/20, 1-(-grav.gravity/20), 0f, 1.0f);
     }
 }
