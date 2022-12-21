@@ -16,8 +16,11 @@ public class Turret_AI : MonoBehaviour
     {
         while (true)
         {
-            FireProjectile();
-            yield return new WaitForSeconds(1.0f/fire_rate);
+            if (line_of_sight)
+            {
+                FireProjectile();
+                yield return new WaitForSeconds(1.0f / fire_rate);
+            }
         }
     }
 
@@ -34,7 +37,7 @@ public class Turret_AI : MonoBehaviour
     void Update()
     {
         Vector3 target_position = getDeflectionPosition(player.transform.position, player.GetComponent<CharacterController>().velocity, transform.position, proj_velocity);
-        if(Mathf.Abs(target_position.x) < 1000000.0f)
+        if (Mathf.Abs(target_position.x) < 1000000.0f)
         {
             transform.LookAt(target_position);
             prev_player_position = target_position;
@@ -46,9 +49,9 @@ public class Turret_AI : MonoBehaviour
         RaycastHit hit;
         Vector3 direction = player.transform.position - transform.position;
         direction.Normalize();
-        if(Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity))
         {
-            if(hit.collider.gameObject.name == "Player")
+            if (hit.collider.gameObject.name == "Player")
             {
                 line_of_sight = true;
             }
@@ -71,17 +74,17 @@ public class Turret_AI : MonoBehaviour
     private Vector3 getDeflectionPosition(Vector3 target_position, Vector3 target_velocity, Vector3 proj_origin, float proj_speed)
     {
         float t = 0.0f;
-        for(int iteration = 0; iteration < MAX_ITER; ++iteration)
+        for (int iteration = 0; iteration < MAX_ITER; ++iteration)
         {
             float old_t = t;
             t = Vector3.Distance(proj_origin, target_position + target_velocity * t) / proj_speed;
-            if(Mathf.Abs(t - old_t) < EPSILON)
+            if (Mathf.Abs(t - old_t) < EPSILON)
             {
                 break;
             }
         }
         return target_position + target_velocity * t;
-    } 
+    }
 
     public void EnableTurret()
     {
