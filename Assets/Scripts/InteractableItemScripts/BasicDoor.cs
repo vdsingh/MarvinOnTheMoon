@@ -11,6 +11,7 @@ public class BasicDoor : MonoBehaviour
 
     // The number of conditions that must be met for the door to open
     public bool useNumConditions = false;
+    public bool extraConditionsValid = false;
     public int numConditionsToMeet = 1;
     private int numConditions = 0;
 
@@ -60,8 +61,10 @@ public class BasicDoor : MonoBehaviour
     public void IncrementConditions()
     {
         numConditions++;
-        if(useNumConditions && numConditions >= numConditionsToMeet) {
-            numConditionsMet.Invoke();
+        if(useNumConditions && numConditions == numConditionsToMeet) {
+            if(numConditions == numConditionsToMeet || (extraConditionsValid && numConditions > numConditionsToMeet)) {
+                numConditionsMet.Invoke();
+            }
         }
     }
 
