@@ -34,8 +34,6 @@ public class BasicDoor : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        Debug.Log("Num conditions met: " + numConditions);
         if(isOpen && door.transform.localPosition.y < 7.0f)
         {
             door.transform.localPosition += new Vector3(0, doorSpeed * Time.time, 0);

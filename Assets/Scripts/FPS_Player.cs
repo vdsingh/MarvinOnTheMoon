@@ -43,6 +43,7 @@ public class FPS_Player : MonoBehaviour
     private bool gravity_mode = false;
     private int health = 100;
     private Vector3 velocity = Vector3.zero;
+    private bool hasWon = false;
 
     // Player Constants
     private float range = 100.0f;
@@ -77,6 +78,10 @@ public class FPS_Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(hasWon) {
+            return;
+        }
+
         if (isCarryingObject)
         {
             Draw_Laser();
@@ -102,6 +107,10 @@ public class FPS_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(hasWon) {
+            return;
+        }
+
         if (pause_menu != null)
         {
             if (pause_menu.GetComponent<PauseMenu>().paused)
@@ -385,5 +394,28 @@ public class FPS_Player : MonoBehaviour
         {
             health_bar.color = Color.red;
         }
+    }
+
+    private void ResetAnimationBools() {
+        animator.SetBool("walkingForward", false);
+        animator.SetBool("walkingBackward", false);
+        animator.SetBool("walkingLeft", false);
+        animator.SetBool("walkingRight", false);
+        animator.SetBool("jumping", false);
+        animator.SetBool("dancing", false);
+    }
+
+    public void Victory() {
+        firstPersonCamera.enabled = false;
+        thirdPersonCamera.enabled = true;
+
+        monkeyBody.active = true;
+        gg.active = false;
+
+        ResetAnimationBools();
+        animator.SetBool("dancing", true);
+
+        hasWon = true;
+
     }
 }
