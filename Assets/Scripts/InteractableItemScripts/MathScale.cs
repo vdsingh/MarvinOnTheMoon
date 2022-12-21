@@ -15,13 +15,22 @@ public class MathScale : MonoBehaviour
     private List<GameObject> weights;
     private bool madeWeight;
     private bool prevMade;
+    public bool showWeight = true;
+    public string altText = "Required Weight:\n";
     // Start is called before the first frame update
     void Start()
     {
         weights = new List<GameObject>();
         totalWeight = 0.0f;
         displayText = displayObj.GetComponent<TextMeshPro>();
-        displayText.text = "Required Weight:\n" + requiredWeight.ToString();
+        if(showWeight)
+        {
+            displayText.text = "Required Weight:\n" + requiredWeight.ToString();
+        }
+        else
+        {
+            displayText.text = altText;
+        }
         madeWeight = false;
         prevMade = false;
         
