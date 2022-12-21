@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ChangableGravity : MonoBehaviour
 {
-    public float gravity = -1.62f;
+    public float gravity = -1.0f;
     private Rigidbody rb;
     internal bool ignoreForce;
     public bool isCarryable = true;
