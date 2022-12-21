@@ -16,7 +16,6 @@ public class MathScale : MonoBehaviour
     private bool madeWeight;
     private bool prevMade;
     public bool showWeight = true;
-    public string altText = "Required Weight:\n";
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +25,6 @@ public class MathScale : MonoBehaviour
         if(showWeight)
         {
             displayText.text = "Required Weight:\n" + requiredWeight.ToString();
-        }
-        else if (altText != "")
-        {
-            displayText.text = altText;
         }
         madeWeight = false;
         prevMade = false;
