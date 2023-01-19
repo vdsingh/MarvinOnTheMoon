@@ -1,3 +1,5 @@
+MarvinOnTheMoon is a game made to educate children on multiple levels of mathematical concepts. Marvin is exploring the moon (and some other environments) and must solve math problems to reach his goal (spoiler: it's a giant banana).
+
 # Contributions
 
 ## Vik
